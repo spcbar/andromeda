@@ -46,6 +46,7 @@ try:
                 requests.get("http://10.0.0.149:9080/api.php?action=brightness&value=200")
                 os.system("cd /home/pi/final/hue-cli/ && /home/pi/final/hue-cli/bin/hue.sh hue 12")
                 os.system("cd /home/pi/final/hue-cli/ && /home/pi/final/hue-cli/bin/hue.sh sat 255")
+                requests.get("http://10.0.0.149:9080/phase.php?phase=1")
             elif re.search(".*(satellite|Satellite).*", value):
                 sat = requests.get("http://spacebar.hurma.tv/satellites")
                 jsonSat = sat.json()
@@ -56,6 +57,8 @@ try:
                 mixer.init()
                 mixer.music.load(rndt + "welcomexx.mp3")
                 mixer.music.play()
+
+                requests.get("http://10.0.0.149:9080/phase.php?phase=2")
             elif re.search(".*(thank|Thank).*", value):
                 myobj = gTTS(text="Thank you for your attention captain! I hope that you liked our space journey!", lang="en", slow=False)
                 myobj.save(rndt + "welcomexx.mp3")
@@ -63,6 +66,8 @@ try:
                 mixer.init()
                 mixer.music.load(rndt + "welcomexx.mp3")
                 mixer.music.play()
+
+                requests.get("http://10.0.0.149:9080/phase.php?phase=3")
             else:
                 rndt = random.choice("abcd4iouth34gh8re9shguigerbhgiufdsbhguib34uithdafioundjzifngiudfse")
                 myobj = gTTS(text="I dont understand your query mr. captain!", lang="en", slow=False)
