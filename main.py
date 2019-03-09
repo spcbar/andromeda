@@ -56,7 +56,7 @@ try:
                 mixer.init()
                 mixer.music.load(rndt + "welcomexx.mp3")
                 mixer.music.play()
-            elif re.search(".*(thank).*", value):
+            elif re.search(".*(thank|Thank).*", value):
                 myobj = gTTS(text="Thank you for your attention captain! I hope that you liked our space journey!", lang="en", slow=False)
                 myobj.save(rndt + "welcomexx.mp3")
 
