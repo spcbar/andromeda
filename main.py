@@ -1,7 +1,7 @@
 import speech_recognition as sr
 from gtts import gTTS
 import os
-import random
+import randompi
 import re
 import requests
 from pygame import mixer
@@ -59,6 +59,17 @@ try:
                 mixer.music.play()
 
                 requests.get("http://10.0.0.149:9080/phase.php?phase=2")
+
+            elif re.search(".*(fireball|Fireball).*", value):
+                sat = requests.get("https://ssd-api.jpl.nasa.gov/fireball.api?www=1&vel-comp=true")
+                jsonSat = sat.json()
+
+                myobj = gTTS(text="Last fireball that it was reported happend " + jsonSat['data'][0][0] + ". Calculated total impacted energy of this fireball was about 4.2 kilotons." , lang="en", slow=False)
+                myobj.save(rndt + "welcomexx.mp3")
+
+                mixer.init()
+                mixer.music.load(rndt + "welcomexx.mp3")
+                mixer.music.play()
             elif re.search(".*(thank|Thank).*", value):
                 myobj = gTTS(text="Thank you for your attention captain! I hope that you liked our space journey!", lang="en", slow=False)
                 myobj.save(rndt + "welcomexx.mp3")
